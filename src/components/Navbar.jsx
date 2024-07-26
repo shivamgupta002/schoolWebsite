@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import { Link } from "react-router-dom";
 import schoolLogo from "../assets/image/school-logo.png"; // Ensure you have a school logo in the assets folder
 
-
-const Navbar = () => {
+const Navbar = memo(() => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -15,7 +14,7 @@ const Navbar = () => {
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-controls="mobile-menu"
-              aria-expanded="false"
+              aria-expanded={isOpen}
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? (
@@ -55,66 +54,27 @@ const Navbar = () => {
           </div>
           <div className="flex-1 flex items-center justify-between sm:items-stretch sm:justify-between">
             <div className="flex-shrink-0">
-              {/* <Link to="/" className="text-2xl font-bold text-blue-600">SPS</Link> */}
-              <Link to="/" className="text-2xl font-bold text-blue-600">
+              <Link to="/" className="flex items-center text-2xl font-bold text-blue-600">
                 <img
                   src={schoolLogo}
                   alt="School Logo"
-                  className="inline-block w-8 h-8 mr-2"
+                  className="w-8 h-8 mr-2"
+                  loading="lazy" // Lazy load the logo image
                 />
                 SPS
               </Link>
             </div>
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
-                <Link
-                  to="/"
-                  className="text-slate-800 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Home
-                </Link>
-                <Link
-                  to="/about"
-                  className="text-slate-800 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  About Us
-                </Link>
-                <Link
-                  to="/faculty"
-                  className="text-slate-800 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Faculty
-                </Link>
-                <Link
-                  to="/admissions"
-                  className="text-slate-800 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Admissions
-                </Link>
-                <Link
-                  to="/academics"
-                  className="text-slate-800 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Academics
-                </Link>
-                <Link
-                  to="/students"
-                  className="text-slate-800 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Students
-                </Link>
-                <Link
-                  to="/gallery"
-                  className="text-slate-800 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Gallery
-                </Link>
-                <Link
-                  to="/contact"
-                  className="text-slate-800 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Contact
-                </Link>
+                {["/", "/about", "/faculty", "/admissions", "/academics", "/students", "/gallery", "/contact"].map((path, index) => (
+                  <Link
+                    key={index}
+                    to={path}
+                    className="text-slate-800 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    {["Home", "About Us", "Faculty", "Admissions", "Academics", "Students", "Gallery", "Contact"][index]}
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
@@ -126,52 +86,19 @@ const Navbar = () => {
         id="mobile-menu"
       >
         <div className="px-2 pt-2 pb-3 space-y-1">
-          <Link
-            to="/"
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-800 hover:text-blue-600 hover:bg-gray-100"
-          >
-            Home
-          </Link>
-          <Link
-            to="/services"
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-800 hover:text-blue-600 hover:bg-gray-100"
-          >
-            Services
-          </Link>
-          <Link
-            to="/about"
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-800 hover:text-blue-600 hover:bg-gray-100"
-          >
-            About Us
-          </Link>
-          <Link
-            to="/why-us"
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-800 hover:text-blue-600 hover:bg-gray-100"
-          >
-            Why Us
-          </Link>
-          <Link
-            to="/testimonials"
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-800 hover:text-blue-600 hover:bg-gray-100"
-          >
-            Testimonials
-          </Link>
-          <Link
-            to="/blog"
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-800 hover:text-blue-600 hover:bg-gray-100"
-          >
-            Blog
-          </Link>
-          <Link
-            to="/contact"
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-800 hover:text-blue-600 hover:bg-gray-100"
-          >
-            Contact
-          </Link>
+          {["/", "/services", "/about", "/why-us", "/testimonials", "/blog", "/contact"].map((path, index) => (
+            <Link
+              key={index}
+              to={path}
+              className="block px-3 py-2 rounded-md text-base font-medium text-slate-800 hover:text-blue-600 hover:bg-gray-100"
+            >
+              {["Home", "Services", "About Us", "Why Us", "Testimonials", "Blog", "Contact"][index]}
+            </Link>
+          ))}
         </div>
       </div>
     </nav>
   );
-};
+});
 
 export default Navbar;

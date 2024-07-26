@@ -51,3 +51,8 @@ export const photos = [
     alt: "Students reading and studying in the school library.",
   },
 ];
+
+export const videos = [
+  { src: 'path/to/school_tour.mp4', title: 'Virtual tour of Springdale Public School' },
+  { src: 'path/to/annual_function.mp4', title: 'Highlights from the Annual Function 2023' }
+];

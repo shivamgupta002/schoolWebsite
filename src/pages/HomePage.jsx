@@ -1,10 +1,8 @@
-import React from "react";
-import { Carousel } from "react-responsive-carousel";
+import React, { Suspense, lazy } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel CSS
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import Introduction from "../components/Introduction";
-// import schoolLogo from "../assets/image/school-logo.png"; // Ensure you have a school logo in the assets folder
+const Introduction = lazy(() => import("../components/Introduction"));
 
 const HomePage = () => {
   return (
@@ -42,47 +40,30 @@ const HomePage = () => {
       {/* Information Section */}
       <div className="bg-gray-100 py-12">
         <div className="container mx-auto px-4 text-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md"
-          >
-            <i className="fas fa-university text-4xl text-blue-600 mb-4"></i>
-            <h3 className="text-xl font-semibold mb-2">University Life</h3>
-            <p className="text-gray-600">Overall in here</p>
-          </motion.div>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md"
-          >
-            <i className="fas fa-graduation-cap text-4xl text-blue-600 mb-4"></i>
-            <h3 className="text-xl font-semibold mb-2">Graduation</h3>
-            <p className="text-gray-600">Getting Diploma</p>
-          </motion.div>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md"
-          >
-            <i className="fas fa-running text-4xl text-blue-600 mb-4"></i>
-            <h3 className="text-xl font-semibold mb-2">Athletics</h3>
-            <p className="text-gray-600">Sport Clubs</p>
-          </motion.div>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md"
-          >
-            <i className="fas fa-users text-4xl text-blue-600 mb-4"></i>
-            <h3 className="text-xl font-semibold mb-2">Social</h3>
-            <p className="text-gray-600">Overall in here</p>
-          </motion.div>
+          {[
+            { icon: "fas fa-university", title: "University Life", description: "Overall in here" },
+            { icon: "fas fa-graduation-cap", title: "Graduation", description: "Getting Diploma" },
+            { icon: "fas fa-running", title: "Athletics", description: "Sport Clubs" },
+            { icon: "fas fa-users", title: "Social", description: "Overall in here" }
+          ].map((item, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md"
+            >
+              <i className={`${item.icon} text-4xl text-blue-600 mb-4`}></i>
+              <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+              <p className="text-gray-600">{item.description}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
 
       {/* Carousel */}
-      <Introduction />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Introduction />
+      </Suspense>
 
       {/* About Section */}
       <div className="bg-blue-600 text-white py-12">
