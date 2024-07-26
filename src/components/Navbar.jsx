@@ -5,6 +5,17 @@ import schoolLogo from "../assets/image/school-logo.png"; // Ensure you have a s
 const Navbar = memo(() => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const navItems = [
+    { path: "/", label: "Home" },
+    { path: "/about", label: "About Us" },
+    { path: "/faculty", label: "Faculty" },
+    { path: "/admissions", label: "Admissions" },
+    { path: "/academics", label: "Academics" },
+    { path: "/students", label: "Students" },
+    { path: "/gallery", label: "Gallery" },
+    { path: "/contact", label: "Contact" },
+  ];
+
   return (
     <nav className="bg-white shadow">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -66,13 +77,13 @@ const Navbar = memo(() => {
             </div>
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
-                {["/", "/about", "/faculty", "/admissions", "/academics", "/students", "/gallery", "/contact"].map((path, index) => (
+                {navItems.map((item) => (
                   <Link
-                    key={index}
-                    to={path}
+                    key={item.path}
+                    to={item.path}
                     className="text-slate-800 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    {["Home", "About Us", "Faculty", "Admissions", "Academics", "Students", "Gallery", "Contact"][index]}
+                    {item.label}
                   </Link>
                 ))}
               </div>
@@ -86,13 +97,13 @@ const Navbar = memo(() => {
         id="mobile-menu"
       >
         <div className="px-2 pt-2 pb-3 space-y-1">
-          {["/", "/services", "/about", "/why-us", "/testimonials", "/blog", "/contact"].map((path, index) => (
+          {navItems.map((item) => (
             <Link
-              key={index}
-              to={path}
+              key={item.path}
+              to={item.path}
               className="block px-3 py-2 rounded-md text-base font-medium text-slate-800 hover:text-blue-600 hover:bg-gray-100"
             >
-              {["Home", "Services", "About Us", "Why Us", "Testimonials", "Blog", "Contact"][index]}
+              {item.label}
             </Link>
           ))}
         </div>
