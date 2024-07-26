@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Additional custom styles */
+.btn {
+  @apply bg-blue-500 text-white font-bold py-2 px-4 rounded;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  @apply bg-blue-700;
+}
+
+/* Carousel legend styles */
+.carousel .legend {
+  @apply p-2 text-center text-lg;
+}
+
+/* Make the carousel images responsive */
+.carousel img {
+  @apply w-full h-full object-cover;
+}
+
+/* Custom styles for carousel */
+.carousel .slide img {
+  @apply rounded-t-lg;
+}
+
+.carousel .carousel-slider {
+  @apply rounded-lg shadow-lg;
+}
