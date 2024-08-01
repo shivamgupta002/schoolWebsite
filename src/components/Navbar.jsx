@@ -1,6 +1,8 @@
 import React, { useState, memo } from "react";
 import { Link } from "react-router-dom";
-import schoolLogo from "../assets/image/school-logo.png"; // Ensure you have a school logo in the assets folder
+import schoolLogo from "../assets/image/school-logo.png";
+import hamburger from "../assets/image/hamburger.png";
+import close from "../assets/image/close.png";
 
 const Navbar = memo(() => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,48 +31,33 @@ const Navbar = memo(() => {
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? (
-                <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
+                <img
+                  src={close}
+                  alt="close"
+                  // style={{ height: "40px", width: "30px",border:"none" }}
+                  className="h-10 w-8 focus:border-none"
                   />
-                </svg>
-              ) : (
-                <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16m-7 6h7"
-                  />
-                </svg>
+                ) : (
+                  <img
+                  src={hamburger}
+                  alt="menu"
+                  // style={{ height: "40px", width: "30px",border:"none" }}
+                  className="h-10 w-8 focus:border-none"
+                />
               )}
             </button>
           </div>
-          <div className="flex-1 flex items-center justify-between sm:items-stretch sm:justify-between">
+          <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex-shrink-0">
-              <Link to="/" className="flex items-center text-2xl font-bold text-blue-600">
+              <Link
+                to="/"
+                className="flex items-center text-2xl font-bold text-blue-600"
+              >
                 <img
                   src={schoolLogo}
                   alt="School Logo"
                   className="w-8 h-8 mr-2"
-                  loading="lazy" // Lazy load the logo image
+                  loading="lazy"
                 />
                 SPS
               </Link>
